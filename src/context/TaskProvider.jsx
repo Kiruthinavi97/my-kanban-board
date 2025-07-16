@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TaskContext } from "./TaskContext.jsx";
-
+import PropTypes from "prop-types";
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState(() => {
     const stored = localStorage.getItem("tasks");
@@ -74,3 +74,7 @@ export function TaskProvider({ children }) {
     </TaskContext.Provider>
   );
 }
+TaskProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
