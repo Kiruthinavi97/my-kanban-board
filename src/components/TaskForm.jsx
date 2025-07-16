@@ -66,14 +66,14 @@ export default function TaskForm() {
           required
           className="border p-2 rounded w-full"
         />
-        <input
+        <textarea
           type="text"
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="border p-2 rounded w-full"
         />
-        <select
+         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
           className="border p-2 rounded w-full"
@@ -111,7 +111,7 @@ export default function TaskForm() {
           {selectedTask ? "Update Task" : "Add Task"}
         </button>
         {selectedTask && (
-          <button type="button" onClick={resetForm} className="bg-grey-300 text-black px-4 py-2 rounded">
+          <button type="button" onClick={resetForm} className="bg-gray-300 text-black px-4 py-2 rounded">
             Cancel
           </button>
         )}

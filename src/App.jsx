@@ -2,6 +2,7 @@ import React from "react";
 import { TaskProvider } from "./context/TaskProvider.jsx";
 import TaskForm from "./components/TaskForm.jsx";
 import Column from "./components/Column.jsx";
+import { useTasks } from "./context/userTasks.jsx";
 
 import {
   DndContext,
@@ -16,8 +17,6 @@ import {
   verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
-
-import { useTasks } from "./context/userTasks.jsx";
 
 const COLUMN_DEFS = [
   { columnId: "todo", title: "To Do" },
