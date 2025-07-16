@@ -1,12 +1,85 @@
-# React + Vite
+**Kanban Board -Task Management Application**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Thi is an task management application using React JS that allows users to create, organize, and move tasks between columns like "To Do", "In Progress", and "Done". This project focuses on drag-and-drop interaction, state management using Context API, and local persistence using localStorage.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Task Board Layout:**
 
-## Expanding the ESLint configuration
+Display multiple task columns: To Do, In Progress, and Done.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+Each column should show task cards with key info like title, description, and optional tags or priority.
+
+
+Responsive layout using TailwindCSS.
+
+
+**Add/Edit/Delete Tasks:**
+
+Allow users to create new tasks via an input form (task name, description, status).
+
+
+Enable editing or deleting tasks using actions on each task card.
+
+
+Task data should persist via localStorage, even after refresh.
+
+
+**Drag and Drop:**
+
+Implement drag-and-drop functionality to move tasks between columns.
+
+
+Dragging should update the internal task state and persist it.
+
+
+Use either react-beautiful-dnd or dnd-kit.
+
+
+**Task Details Modal :**
+
+On clicking a task, open a modal to view full details.
+
+
+Enable inline editing of fields like description or status.
+
+
+
+**User Features:**
+
+View tasks organized into visual columns.
+
+
+Drag and drop tasks between columns smoothly.
+
+
+Create, edit, or delete task cards.
+
+
+Data is persisted locally so user doesn’t lose progress on reload.
+
+
+Optional: Add tags, priorities, or deadlines for tasks.
+
+
+
+**Tech Stack to be Used:**
+
+React JS
+
+
+TailwindCSS for styling
+
+
+React Hooks (useState, useContext, useEffect) for state management
+
+
+Context API for global task state
+
+
+react-beautiful-dnd or dnd-kit for drag-and-drop
+
+
+localStorage for persistence (no external APIs required)
+
+
