@@ -30,6 +30,6 @@ export default function Column({ columnId, title }) {
 }
 
 Column.propTypes = {
-  columnId: PropTypes.oneOf(["To Do", "In Progress", "Done"]).isRequired,
-  title: PropTypes.oneOf(["To Do", "In Progress", "Done"]).isRequired,
+  columnId: PropTypes.oneOf(["todo", "inprogress", "completed"]).isRequired,
+  title: PropTypes.string.isRequired,
 };

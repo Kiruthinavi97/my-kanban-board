@@ -13,8 +13,6 @@ import {
 } from "@dnd-kit/core";
 
 import {
-  SortableContext,
-  verticalListSortingStrategy,
   arrayMove,
 } from "@dnd-kit/sortable";
 
@@ -25,16 +23,42 @@ const COLUMN_DEFS = [
 ];
 
 function KanbanBoard() {
-  const { tasks, updateTaskOrder } = useTasks();
+  const { tasks, moveTask, updateTaskOrder } = useTasks();
   const sensors = useSensors(useSensor(PointerSensor));
-  const items = tasks.map((t) => t.id);
 
   const handleDragEnd = ({ active, over }) => {
-    if (!over || active.id === over.id) return;
-    const oldIndex = items.indexOf(active.id);
-    const newIndex = items.indexOf(over.id);
-    const newItems = arrayMove(items, oldIndex, newIndex);
-    updateTaskOrder(newItems);
+    if (!over) return;
+
+    const activeTask = tasks.find(task => task.id === active.id);
+    if (!activeTask) return;
+
+    // Check if dropped on a column
+    if (COLUMN_DEFS.some(col => col.columnId === over.id)) {
+      // Moving to a different column
+      if (activeTask.status !== over.id) {
+        moveTask(active.id, over.id);
+      }
+      return;
+    }
+
+    // Check if dropped on another task
+    const overTask = tasks.find(task => task.id === over.id);
+    if (overTask) {
+      // If moving to a different column
+      if (activeTask.status !== overTask.status) {
+        moveTask(active.id, overTask.status);
+      } else {
+        // Reordering within the same column
+        const columnTasks = tasks.filter(task => task.status === activeTask.status);
+        const oldIndex = columnTasks.findIndex(task => task.id === active.id);
+        const newIndex = columnTasks.findIndex(task => task.id === over.id);
+        
+        if (oldIndex !== newIndex) {
+          const reorderedTasks = arrayMove(columnTasks, oldIndex, newIndex);
+          updateTaskOrder(reorderedTasks.map(task => task.id));
+        }
+      }
+    }
   };
 
   return (
@@ -43,13 +67,11 @@ function KanbanBoard() {
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {COLUMN_DEFS.map(({ columnId, title }) => (
-            <Column key={columnId} title={title} columnId={columnId} />
-          ))}
-        </div>
-      </SortableContext>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {COLUMN_DEFS.map(({ columnId, title }) => (
+          <Column key={columnId} title={title} columnId={columnId} />
+        ))}
+      </div>
     </DndContext>
   );
 }
